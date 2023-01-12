@@ -1,0 +1,15 @@
+# Rust files
+/target
+/Cargo.lock
+
+# IDE Specific Files
+*.swp
+*.swo
+Session.vim
+.cproject
+.idea
+*.iml
+.vscode
+.project
+.favorites.json
+.settings/
