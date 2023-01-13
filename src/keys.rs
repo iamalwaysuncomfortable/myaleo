@@ -1,5 +1,6 @@
 // Copyright (C) 2019-2022 Aleo Systems Inc.
 
+use colored::Colorize;
 use rand_chacha::{rand_core::SeedableRng, ChaChaRng};
 use serde::{Deserialize, Serialize};
 use snarkvm_console::{
@@ -29,15 +30,16 @@ impl AleoKeys {
         })
     }
 
+    /// Pretty print the Aleo key tuple to the console output
     pub fn pretty_print(&self) {
         let private_key = self.private_key;
         let view_key = self.view_key;
         let address = self.address;
         let output = format!(
             " {:>12}  {private_key}\n {:>12}  {view_key}\n {:>12}  {address}",
-            "Private Key",
-            "View Key",
-            "Address",
+            "Private Key".blue(),
+            "View Key".blue(),
+            "Address".blue(),
         );
         println!("{}", output);
     }
@@ -46,7 +48,7 @@ impl AleoKeys {
 impl TryFrom<&PrivateKey<Testnet3>> for AleoKeys {
     type Error = Error;
 
-    /// Derives the account tuple
+    // Derive an account tuple from a specified private key
     fn try_from(private_key: &PrivateKey<Testnet3>) -> Result<Self, Self::Error> {
         let view_key = ViewKey::<Testnet3>::try_from(private_key)?;
         let address = Address::<Testnet3>::try_from(&view_key)?;
